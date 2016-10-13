@@ -1,5 +1,6 @@
 package local.zone.simpleapp.dao.dao;
 
+import local.zone.simpleapp.dao.entity.Card;
 import local.zone.simpleapp.dao.generic.AbstractGenericDaoImpl;
 
 import java.sql.Connection;

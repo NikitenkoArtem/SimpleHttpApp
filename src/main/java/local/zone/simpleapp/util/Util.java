@@ -1,10 +1,16 @@
 package local.zone.simpleapp.util;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import local.zone.simpleapp.dao.entity.Commission;
 import local.zone.simpleapp.dao.entity.Currency;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,44 +24,30 @@ import java.util.ArrayList;
  */
 public class Util {
 
-    public ArrayList<Commission> parseXml(File file) {
+    public String getJson(Class<?> clazz) {
+        Gson gson = new Gson();
+        return gson.toJson(clazz);
+    }
+
+    public Object getEntityFromJson(JsonElement json, Class<?> clazz) {
+        return new Gson().fromJson(json, clazz);
+    }
+
+    public void parseXml(File file) {
         if (file == null || !file.exists()) {
             throw new RuntimeException(new FileNotFoundException());
         } else {
+            JAXBContext context = null;
             try {
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder docBuilder = factory.newDocumentBuilder();
-                Document doc = docBuilder.parse(file);
-                NodeList nodeList = doc.getElementsByTagName("commission");
-                ArrayList<Commission> list = new ArrayList<>();
-                for (int index = 0; index < nodeList.getLength(); index++) {
-                    Element element = (Element) nodeList.item(index);
-                    Commission commission = new Commission();
-                    try {
-                        commission.setCommissionId(Integer.parseInt(element.getAttribute("id")));
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-                    commission.setBrand(element.getElementsByTagName("brand").item(index).getTextContent());
-                    Currency currencyName = new Currency();
-                    currencyName.setCurrency(element.getElementsByTagName("currency").item(index).getTextContent());
-                    commission.setCurrencyId(currencyName);
-                    try {
-                        commission.setValue(Float.parseFloat(element.getElementsByTagName("value").item(index).getTextContent()));
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-                    list.add(commission);
-                }
-                return list;
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+                context = JAXBContext.newInstance(Commissions.class);
+                Unmarshaller unmarshaller = context.createUnmarshaller();
+                Commissions commission = (Commissions) unmarshaller.unmarshal(file);
+                Marshaller marshaller = context.createMarshaller();
+                marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                marshaller.marshal(commission, System.out);
+            } catch (JAXBException e) {
                 e.printStackTrace();
             }
         }
-        return null;
     }
 }

@@ -1,9 +1,7 @@
 package local.zone.simpleapp.handler;
 
-import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import local.zone.simpleapp.dao.entity.Card;
 
 import java.io.IOException;
 import java.net.URI;
@@ -22,10 +20,5 @@ public class HttpSetHandler implements HttpHandler {
         httpExchange.getAttribute("recipient_card_id");
         httpExchange.getAttribute("recipient_owner");
         httpExchange.getAttribute("recipient_expire");
-
-        StringBuilder builder = new StringBuilder();
-        Gson gson = new Gson();
-        gson.toJson(new Card());
-//        builder.append();
     }
 }

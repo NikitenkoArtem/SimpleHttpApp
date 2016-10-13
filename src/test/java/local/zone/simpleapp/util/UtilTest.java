@@ -16,29 +16,18 @@ public class UtilTest {
     public void parseXml() throws Exception {
         File file = new File("commission.xml");
         Util parser = new Util();
-        ArrayList<Commission> list = parser.parseXml(file);
-        Assert.assertNotNull(list);
-        for (Commission commission : list) {
-            System.out.println(commission.getCommissionId());
-            System.out.println(commission.getBrand());
-            System.out.println(commission.getCurrencyId().getCurrency());
-            System.out.println(commission.getValue());
-        }
+        parser.parseXml(file);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseXmlEmptyString() throws Exception {
         File file = new File("");
-        Util parser = new Util();
-        ArrayList<Commission> list = parser.parseXml(file);
-        Assert.assertNull(list);
+        new Util().parseXml(file);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseXmlNull() throws Exception {
         File file = null;
-        Util parser = new Util();
-        ArrayList<Commission> list = parser.parseXml(file);
-        Assert.assertNull(list);
+        new Util().parseXml(file);
     }
 }
