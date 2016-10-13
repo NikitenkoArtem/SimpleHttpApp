@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<commissions>
+    <commission id="1">
+        <brand>MASTERCARD</brand>
+        <currency>RUB</currency>
+        <value>2.5</value>
+    </commission>
+</commissions>
