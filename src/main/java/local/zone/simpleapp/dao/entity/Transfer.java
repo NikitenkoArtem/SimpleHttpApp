@@ -9,9 +9,9 @@ import java.sql.Date;
 public class Transfer implements Serializable {
     private Integer transferId;
     private Date transferDate;
-    private String currency;
+    private Currency currencyId;
     private Integer sum;
-    private Integer commission;
+    private Integer commissionId;
 
     public Transfer() {
     }
@@ -32,12 +32,12 @@ public class Transfer implements Serializable {
         this.transferDate = transferDate;
     }
 
-    public String getCurrency() {
-        return currency;
+    public Currency getCurrencyId() {
+        return currencyId;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setCurrencyId(Currency currencyId) {
+        this.currencyId = currencyId;
     }
 
     public Integer getSum() {
@@ -48,12 +48,12 @@ public class Transfer implements Serializable {
         this.sum = sum;
     }
 
-    public Integer getCommission() {
-        return commission;
+    public Integer getCommissionId() {
+        return commissionId;
     }
 
-    public void setCommission(Integer commission) {
-        this.commission = commission;
+    public void setCommissionId(Integer commissionId) {
+        this.commissionId = commissionId;
     }
 
     @Override
@@ -61,9 +61,9 @@ public class Transfer implements Serializable {
         return "Transfer{" +
                 "transferId=" + transferId +
                 ", transferDate=" + transferDate +
-                ", currency='" + currency + '\'' +
+                ", currencyId='" + currencyId + '\'' +
                 ", sum=" + sum +
-                ", commission=" + commission +
+                ", commissionId=" + commissionId +
                 '}';
     }
 }

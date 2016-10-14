@@ -10,19 +10,19 @@ import java.io.Serializable;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Currency implements Serializable {
-    private Integer cardId;
+    private Integer currencyId;
     @XmlElement
     private String currency;
 
     public Currency() {
     }
 
-    public Integer getCardId() {
-        return cardId;
+    public Integer getCurrencyId() {
+        return currencyId;
     }
 
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
+    public void setCurrencyId(Integer currencyId) {
+        this.currencyId = currencyId;
     }
 
     public String getCurrency() {
@@ -36,7 +36,7 @@ public class Currency implements Serializable {
     @Override
     public String toString() {
         return "Currency{" +
-                "cardId=" + cardId +
+                "currencyId=" + currencyId +
                 ", currency='" + currency + '\'' +
                 '}';
     }

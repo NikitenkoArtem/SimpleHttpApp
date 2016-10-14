@@ -23,23 +23,12 @@ import java.util.ArrayList;
  * Created by Price on 13.10.2016.
  */
 public class Util {
-
-    public String getJson(Class<?> clazz) {
-        Gson gson = new Gson();
-        return gson.toJson(clazz);
-    }
-
-    public Object getEntityFromJson(JsonElement json, Class<?> clazz) {
-        return new Gson().fromJson(json, clazz);
-    }
-
-    public void parseXml(File file) {
+    public static void parseXml(File file) {
         if (file == null || !file.exists()) {
             throw new RuntimeException(new FileNotFoundException());
         } else {
-            JAXBContext context = null;
             try {
-                context = JAXBContext.newInstance(Commissions.class);
+                JAXBContext context = JAXBContext.newInstance(Commissions.class);
                 Unmarshaller unmarshaller = context.createUnmarshaller();
                 Commissions commission = (Commissions) unmarshaller.unmarshal(file);
                 Marshaller marshaller = context.createMarshaller();
