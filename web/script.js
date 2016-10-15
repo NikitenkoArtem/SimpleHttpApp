@@ -1,15 +1,4 @@
-function getXmlHttpRequest() {
-    return new XmlHttpRequest();
-}
-
-function getSumCommission() {
-    var request = getXmlHttpRequest();
-    var handler = getReadyStateHandler(request, updateCart);
-    request.onreadystatechange = handler;
-    request.open("POST", "cart.do", true);
-    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    request.send("currency=" + currency);
-}
+/*
 window.onload = function() {
     var array = ["RUB", "BYN"];
     var currencies = document.getElementById("currencies");
@@ -20,4 +9,4 @@ window.onload = function() {
         option.value = array[i];
         select.appendChild(option);
     }
-}
+}*/

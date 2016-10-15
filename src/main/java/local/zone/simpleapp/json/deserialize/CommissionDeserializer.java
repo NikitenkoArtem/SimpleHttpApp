@@ -17,7 +17,7 @@ public class CommissionDeserializer implements JsonDeserializer<Commission> {
         commission.setCommissionId(json.get("commissionId").getAsInt());
         commission.setBrand(json.get("brand").getAsString());
         commission.setCurrencyId(context.deserialize(json.get("currencyId"), Currency.class));
-        commission.setValue(json.get("cardOwner").getAsFloat());
+        commission.setValue(json.get("value").getAsFloat());
         return commission;
     }
 }

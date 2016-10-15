@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Money Transfer</title>
-    <!--<link rel="script" href="script.js"/>-->
     <style type="text/css">
         .data{
             width: 45%;
@@ -13,10 +12,12 @@
         div.data .recipient{float: right}
         div.data .money{float: left}
         .submit{width: 20px; margin: 10px}
+
+
     </style>
 </head>
 <body>
-<form method="post" action="set">
+<form method="get" action="set">
     <div class="data">
         <div class="receiver">
             <span class="title">Receiver information</span>
@@ -61,7 +62,7 @@
                 </tr>
                 <tr>
                     <td>Currency</td>
-                    <td id="currencies"></td>
+                    <td id="currency"></td>
                 </tr>
             </table>
         </div>

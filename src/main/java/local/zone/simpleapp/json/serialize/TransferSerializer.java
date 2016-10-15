@@ -20,7 +20,6 @@ public class TransferSerializer implements JsonSerializer<Transfer> {
         if (transfer != null) {
             json.addProperty("transferId", transfer.getTransferId());
             json.addProperty("transferDate", String.valueOf(transfer.getTransferDate()));
-            json.add("currencyId", context.serialize(transfer.getCurrencyId(), Currency.class));
             json.addProperty("sum", transfer.getSum());
             json.add("commissionId", context.serialize(transfer.getCommissionId(), Commission.class));
         }

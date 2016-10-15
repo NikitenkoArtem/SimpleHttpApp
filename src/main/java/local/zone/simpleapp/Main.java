@@ -2,8 +2,8 @@ package local.zone.simpleapp;
 
 import com.sun.net.httpserver.HttpServer;
 import local.zone.simpleapp.dao.connection.DBConnection;
-import local.zone.simpleapp.handler.HttpIndexHandler;
-import local.zone.simpleapp.handler.HttpSetHandler;
+import local.zone.simpleapp.handler.IndexHttpHandler;
+import local.zone.simpleapp.handler.OfferHttpHandler;
 import local.zone.simpleapp.util.Util;
 
 import java.io.File;
@@ -29,9 +29,8 @@ public class Main {
             HttpServer server = HttpServer.create();
             server.bind(new InetSocketAddress(8080), 0);
             logger.log(Level.INFO, "Server listening port: 8080");
-            server.createContext("/SimpleHttpApp", new HttpIndexHandler());
-//            server.createContext("/SimpleHttpApp/get", new HttpIndexHandler());
-            server.createContext("/SimpleHttpApp/set", new HttpSetHandler());
+            server.createContext("/SimpleHttpApp", new IndexHttpHandler());
+            server.createContext("/SimpleHttpApp/offer", new OfferHttpHandler());
             server.setExecutor(null);
             prepareDatabase();
             server.start();
