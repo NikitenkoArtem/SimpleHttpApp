@@ -22,11 +22,13 @@ public class CardDao extends AbstractGenericDaoImpl<Card, Integer> {
     @Override
     public Integer create(Card entity) {
         Map<Integer, Object> sqlParams = new HashMap<>();
-        sqlParams.put(1, entity.getUserId().getUserId());
-        sqlParams.put(2, entity.getExpirationDate());
+        sqlParams.put(1, entity.getCardId());
+        sqlParams.put(2, entity.getUserId().getUserId());
+        sqlParams.put(3, entity.getExpirationDate());
         setSqlParams(sqlParams);
-        setSql("INSER INTO cards(user_id, expiration_date) VALUES(?, ?)");
-        return super.create(entity);
+        setSql("INSERT INTO cards(card_id, user_id, expiration_date) VALUES(?, ?, ?)");
+        super.create(entity);
+        return getNewPK();
     }
 
     @Override

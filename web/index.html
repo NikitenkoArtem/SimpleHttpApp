@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Money Transfer</title>
+    <!--<link rel="script" href="web/script.js"/>-->
     <style type="text/css">
         .data{
             width: 45%;
@@ -17,7 +18,7 @@
     </style>
 </head>
 <body>
-<form method="get" action="set">
+<form method="get" action="/SimpleHttpApp/offer">
     <div class="data">
         <div class="receiver">
             <span class="title">Receiver information</span>
@@ -27,8 +28,12 @@
                     <td><input type="text" name="receiver_card_id" required/></td>
                 </tr>
                 <tr>
-                    <td>Owner</td>
-                    <td><input type="text" name="receiver_owner" required/></td>
+                    <td>Owner first name</td>
+                    <td><input type="text" name="receiver_owner_firstName" required/></td>
+                </tr>
+                <tr>
+                    <td>Owner last name</td>
+                    <td><input type="text" name="receiver_owner_lastName" required/></td>
                 </tr>
                 <tr>
                     <td>Expiration date</td>
@@ -44,8 +49,12 @@
                     <td><input type="text" name="recipient_card_id" required/></td>
                 </tr>
                 <tr>
-                    <td>Owner</td>
-                    <td><input type="text" name="recipient_owner" required/></td>
+                    <td>Owner first name</td>
+                    <td><input type="text" name="recipient_owner_firstName" required/></td>
+                </tr>
+                <tr>
+                    <td>Owner last name</td>
+                    <td><input type="text" name="recipient_owner_lastName" required/></td>
                 </tr>
                 <tr>
                     <td>Expiration date</td>
@@ -62,7 +71,11 @@
                 </tr>
                 <tr>
                     <td>Currency</td>
-                    <td id="currency"></td>
+                    <td><input type="text" name="currency" required/></td>
+                </tr>
+                <tr>
+                    <td>Brand</td>
+                    <td><input type="text" name="brand" required/></td></td>
                 </tr>
             </table>
         </div>

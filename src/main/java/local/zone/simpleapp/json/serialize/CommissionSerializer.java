@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import local.zone.simpleapp.dao.entity.Commission;
-import local.zone.simpleapp.dao.entity.Currency;
 
 import java.lang.reflect.Type;
 
@@ -19,7 +18,7 @@ public class CommissionSerializer implements JsonSerializer<Commission> {
         if (commission != null) {
             json.addProperty("commissionId", commission.getCommissionId());
             json.addProperty("brand", commission.getBrand());
-            json.add("currencyId", context.serialize(commission.getCurrencyId(), Currency.class));
+            json.addProperty("currency", commission.getCurrency());
             json.addProperty("value", commission.getValue());
         }
         return json;

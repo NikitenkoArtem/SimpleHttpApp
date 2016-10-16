@@ -27,7 +27,8 @@ public class TransferDao extends AbstractGenericDaoImpl<Transfer, Integer> {
         sqlParams.put(3, entity.getCommissionId().getCommissionId());
         setSqlParams(sqlParams);
         setSql("INSERT INTO transfers(transfer_date, sum, commission_id) VALUES(?, ?, ?)");
-        return super.create(entity);
+        super.create(entity);
+        return getNewPK();
     }
 
     @Override

@@ -2,8 +2,12 @@ package local.zone.simpleapp;
 
 import com.sun.net.httpserver.HttpServer;
 import local.zone.simpleapp.dao.connection.DBConnection;
+import local.zone.simpleapp.dao.dao.CommissionDao;
+import local.zone.simpleapp.dao.entity.Commission;
 import local.zone.simpleapp.handler.IndexHttpHandler;
 import local.zone.simpleapp.handler.OfferHttpHandler;
+import local.zone.simpleapp.util.Commissions;
+import local.zone.simpleapp.util.Log;
 import local.zone.simpleapp.util.Util;
 
 import java.io.File;
@@ -15,6 +19,7 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +27,7 @@ import java.util.logging.Logger;
  * Created by Price on 13.10.2016.
  */
 public class Main {
-    private static Logger logger = Logger.getLogger(Main.class.getName());
+    private static Logger logger = Log.getLogger(Main.class, "app.log");
 
     public static void main(String[] args) {
         try {
@@ -48,8 +53,14 @@ public class Main {
             String sql = new String(Files.readAllBytes(path));
             statement.execute(sql);
             logger.log(Level.INFO, "Database schema created successfully");
-            //TODO: executeUpdate from commission.xml to database
-            Util.parseXml(new File("./resources/commission.xml"));
+            File file = new File("./resources/commission.xml");
+            Commissions commissions = Util.parseXml(file);
+            Iterator<Commission> it = commissions.getCommissions().iterator();
+            CommissionDao commissionDao = new CommissionDao(connection, Commission.class);
+            while (it.hasNext()) {
+                Commission next = it.next();
+                commissionDao.create(next);
+            }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         }

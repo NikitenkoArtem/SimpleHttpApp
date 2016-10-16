@@ -10,11 +10,11 @@ import java.io.Serializable;
 public class Commission implements Serializable {
     @XmlAttribute(name = "id")
     private Integer commissionId;
-    @XmlElement
+    @XmlElement(required = true)
     private String brand;
-    @XmlElement(name = "currency", type = Currency.class)
-    private Currency currencyId;
-    @XmlElement
+    @XmlElement(required = true)
+    private String currency;
+    @XmlElement(required = true)
     private Float value;
 
     public Commission() {
@@ -36,12 +36,12 @@ public class Commission implements Serializable {
         this.brand = brand;
     }
 
-    public Currency getCurrencyId() {
-        return currencyId;
+    public String getCurrency() {
+        return currency;
     }
 
-    public void setCurrencyId(Currency currencyId) {
-        this.currencyId = currencyId;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public Float getValue() {
@@ -57,7 +57,7 @@ public class Commission implements Serializable {
         return "Commission{" +
                 "commissionId=" + commissionId +
                 ", brand='" + brand + '\'' +
-                ", currencyId=" + currencyId +
+                ", currency=" + currency +
                 ", value=" + value +
                 '}';
     }

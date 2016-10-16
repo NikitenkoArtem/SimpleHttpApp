@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import local.zone.simpleapp.dao.entity.Commission;
-import local.zone.simpleapp.dao.entity.Currency;
 import local.zone.simpleapp.dao.entity.Transfer;
 
 import java.lang.reflect.Type;

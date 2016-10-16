@@ -23,9 +23,10 @@ public class UserDao extends AbstractGenericDaoImpl<User, Integer> {
         Map<Integer, Object> sqlParams = new HashMap<>();
         sqlParams.put(1, entity.getFirstName());
         sqlParams.put(2, entity.getLastName());
-        setSqlParams(sqlParams);
+        super.setSqlParams(sqlParams);
         setSql("INSERT INTO users(first_name, last_name) VALUES(?, ?)");
-        return super.create(entity);
+        super.create(entity);
+        return getNewPK();
     }
 
     @Override

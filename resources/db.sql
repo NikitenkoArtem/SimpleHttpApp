@@ -5,15 +5,8 @@ CREATE TABLE users (
     CONSTRAINT USER_ID_PK PRIMARY KEY (user_id)
 );
 
-CREATE TABLE currencies (
-    currency_id INT NOT NULL AUTO_INCREMENT,
-    currency VARCHAR(3) NOT NULL,
-    CONSTRAINT CURRENCY_ID_PK PRIMARY KEY (currency_id),
-    CONSTRAINT CURRENCY_UN UNIQUE (currency)
-);
-
 CREATE TABLE cards (
-    card_id INT NOT NULL AUTO_INCREMENT,
+    card_id INT NOT NULL,
     user_id INT NOT NULL,
     expiration_date DATE NOT NULL,
     CONSTRAINT CARD_ID_PK PRIMARY KEY (card_id),
@@ -21,12 +14,11 @@ CREATE TABLE cards (
 );
 
 CREATE TABLE commissions (
-    commission_id INT NOT NULL AUTO_INCREMENT,
+    commission_id INT NOT NULL,
     brand VARCHAR(30) NOT NULL,
-    currency_id INT NOT NULL,
+    currency VARCHAR(3) NOT NULL,
     value FLOAT NOT NULL,
-    CONSTRAINT COMMISSION_ID_PK PRIMARY KEY (commission_id),
-    CONSTRAINT CURRENCY_ID_FK FOREIGN KEY (currency_id) REFERENCES currencies(currency_id) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT COMMISSION_ID_PK PRIMARY KEY (commission_id)
 );
 
 CREATE TABLE transfers (

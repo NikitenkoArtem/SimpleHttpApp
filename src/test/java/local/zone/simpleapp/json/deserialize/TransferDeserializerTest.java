@@ -5,8 +5,6 @@ import local.zone.simpleapp.dao.entity.Transfer;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Price on 15.10.2016.
  */
@@ -23,6 +21,6 @@ public class TransferDeserializerTest {
         Assert.assertNotNull(transfer.getSum());
         Assert.assertNotNull(transfer.getCommissionId().getCommissionId());
         Assert.assertNotNull(transfer.getCommissionId().getBrand());
-        Assert.assertNotNull(transfer.getCommissionId().getCurrencyId().getCurrency());
+        Assert.assertNotNull(transfer.getCommissionId().getCurrency());
     }
 }

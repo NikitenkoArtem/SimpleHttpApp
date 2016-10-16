@@ -1,10 +1,14 @@
 package local.zone.simpleapp.dao.generic;
 
+import local.zone.simpleapp.util.Log;
+
 import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Price on 30.09.2016.
@@ -14,6 +18,8 @@ public abstract class AbstractGenericDaoImpl<E, PK> implements GenericDao<E, PK>
     private String sql;
     private Map<Integer, Object> sqlParams;
     private Class<E> clazz;
+    private Logger logger = Log.getLogger(this.getClass());
+    private Integer newPK;
 
     public AbstractGenericDaoImpl(Connection connection, Class<E> clazz) {
         this.connection = connection;
@@ -23,9 +29,9 @@ public abstract class AbstractGenericDaoImpl<E, PK> implements GenericDao<E, PK>
     @Override
     public PK create(E entity) {
         try {
-            executeUpdate();
+            newPK = executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return null;
     }
@@ -42,7 +48,7 @@ public abstract class AbstractGenericDaoImpl<E, PK> implements GenericDao<E, PK>
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return entity;
     }
@@ -61,7 +67,7 @@ public abstract class AbstractGenericDaoImpl<E, PK> implements GenericDao<E, PK>
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return list;
     }
@@ -71,7 +77,7 @@ public abstract class AbstractGenericDaoImpl<E, PK> implements GenericDao<E, PK>
         try {
             executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
     }
 
@@ -94,11 +100,14 @@ public abstract class AbstractGenericDaoImpl<E, PK> implements GenericDao<E, PK>
                 if (value instanceof String) {
                     stmt.setString(index, value.toString());
                 }
+                if (value instanceof Double) {
+                    stmt.setDouble(index, ((Double) value).doubleValue());
+                }
+                if (value instanceof Float) {
+                    stmt.setFloat(index, ((Float) value).floatValue());
+                }
             }
             return stmt.executeUpdate();
-//            if (!connection.getAutoCommit()) {
-//                connection.commit();
-//            }
         }
     }
 
@@ -107,27 +116,31 @@ public abstract class AbstractGenericDaoImpl<E, PK> implements GenericDao<E, PK>
         try {
             entity = (E) entityClass.newInstance();
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, e.getMessage());
         }
         return entity;
     }
 
-    public String getSql() {
+    protected String getSql() {
         return sql;
     }
 
-    public void setSql(String sql) {
+    protected void setSql(String sql) {
         this.sql = sql;
     }
 
-    public Map<Integer, Object> getSqlParams() {
+    protected Map<Integer, Object> getSqlParams() {
         return sqlParams;
     }
 
-    public void setSqlParams(Map<Integer, Object> sqlParams) {
+    protected void setSqlParams(Map<Integer, Object> sqlParams) {
         this.sqlParams = sqlParams;
+    }
+
+    protected Integer getNewPK() {
+        return newPK;
     }
 
     protected abstract void selectRow(ResultSet rs, E entity) throws SQLException;

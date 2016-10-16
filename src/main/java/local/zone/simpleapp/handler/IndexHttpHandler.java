@@ -20,15 +20,13 @@ public class IndexHttpHandler implements HttpHandler {
     public void handle(HttpExchange httpExchange) {
         Logger logger = Log.getLogger(this.getClass());//, "app.log");
         logger.log(Level.INFO, httpExchange.getRequestURI().getPath());
-        OutputStream responseBody = httpExchange.getResponseBody();
         Path path = FileSystems.getDefault().getPath("web", "index.html");
-        try {
+        try (OutputStream responseBody = httpExchange.getResponseBody()) {
             httpExchange.sendResponseHeaders(200, 0);
             String read = new String(Files.readAllBytes(path));
             byte[] bytes = String.valueOf(read).getBytes();
             responseBody.write(bytes);
             responseBody.flush();
-            responseBody.close();
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage());
         }

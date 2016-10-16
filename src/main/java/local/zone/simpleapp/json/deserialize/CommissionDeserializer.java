@@ -2,7 +2,6 @@ package local.zone.simpleapp.json.deserialize;
 
 import com.google.gson.*;
 import local.zone.simpleapp.dao.entity.Commission;
-import local.zone.simpleapp.dao.entity.Currency;
 
 import java.lang.reflect.Type;
 
@@ -16,7 +15,7 @@ public class CommissionDeserializer implements JsonDeserializer<Commission> {
         Commission commission = new Commission();
         commission.setCommissionId(json.get("commissionId").getAsInt());
         commission.setBrand(json.get("brand").getAsString());
-        commission.setCurrencyId(context.deserialize(json.get("currencyId"), Currency.class));
+        commission.setCurrency(json.get("currency").getAsString());
         commission.setValue(json.get("value").getAsFloat());
         return commission;
     }
