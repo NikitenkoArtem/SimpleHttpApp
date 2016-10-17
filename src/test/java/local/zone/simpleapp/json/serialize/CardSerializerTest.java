@@ -19,6 +19,7 @@ public class CardSerializerTest {
         card.setCardId(1);
         User user = new User();
         user.setFirstName("Vasya");
+        user.setLastName("Pupkin");
         card.setUserId(user);
         card.setExpirationDate(new Date(System.currentTimeMillis()));
         Gson gson = new GsonBuilder().registerTypeAdapter(Card.class, new CardSerializer()).create();

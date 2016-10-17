@@ -1,11 +1,8 @@
 package local.zone.simpleapp.util;
 
-import local.zone.simpleapp.dao.entity.Commission;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by Price on 13.10.2016.
@@ -14,7 +11,7 @@ public class UtilTest {
 
     @Test
     public void parseXml() throws Exception {
-        File file = new File("commission.xml");
+        File file = new File("resources/commission.xml");
         Util parser = new Util();
         parser.parseXml(file);
     }

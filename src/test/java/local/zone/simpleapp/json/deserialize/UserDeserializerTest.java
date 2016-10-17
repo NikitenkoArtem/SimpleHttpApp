@@ -16,6 +16,7 @@ public class UserDeserializerTest {
     public void deserialize() throws Exception {
         String json = "{\"userId\":1,\"firstName\":\"Vasya\",\"lastName\":\"Pupkin\"}";
         User user = new Gson().fromJson(json, User.class);
+        System.out.println(user);
         Assert.assertNotNull(user.getUserId());
         Assert.assertNotNull(user.getFirstName());
         Assert.assertNotNull(user.getLastName());

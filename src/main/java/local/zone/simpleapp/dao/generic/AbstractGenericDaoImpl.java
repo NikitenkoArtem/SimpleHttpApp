@@ -86,7 +86,7 @@ public abstract class AbstractGenericDaoImpl<E, PK> implements GenericDao<E, PK>
 
     }
 
-    private int executeUpdate() throws SQLException {
+    private Integer executeUpdate() throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             for (Map.Entry<Integer, Object> entry : sqlParams.entrySet()) {
                 final int index = entry.getKey().intValue();
@@ -107,7 +107,12 @@ public abstract class AbstractGenericDaoImpl<E, PK> implements GenericDao<E, PK>
                     stmt.setFloat(index, ((Float) value).floatValue());
                 }
             }
-            return stmt.executeUpdate();
+            stmt.executeUpdate();
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys != null && generatedKeys.next()) {
+                return generatedKeys.getInt(1);
+            }
+            return null;
         }
     }
 

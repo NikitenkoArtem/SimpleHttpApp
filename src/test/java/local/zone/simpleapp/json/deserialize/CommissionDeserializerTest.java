@@ -19,7 +19,7 @@ public class CommissionDeserializerTest {
         json = new JsonObject();
         json.addProperty("commissionId", 1);
         json.addProperty("brand", "MasterCard");
-        json.addProperty("currencyId", "BYN");
+        json.addProperty("currency", "BYN");
         json.addProperty("value", 1.5);
     }
 
@@ -45,7 +45,6 @@ public class CommissionDeserializerTest {
     public void deserializeNull() throws Exception {
         json = null;
         Commission commission = new Gson().fromJson(json, Commission.class);
-        System.out.println(commission);
         Assert.assertNull(commission);
     }
 }
